@@ -1,17 +1,14 @@
 package com.company;
 
-import au.com.bytecode.opencsv.CSVReader;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import com.opencsv.CSVReader;
 
 import java.io.IOException;
 import java.io.Reader;
 
 
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 public class ParserCSV implements Parser  {
     private String fileName;
@@ -41,7 +38,13 @@ public class ParserCSV implements Parser  {
 
     @Override
     public boolean hasNextLine(){
-        return true;
+        try {
+            String[] line = this.CSVreader.peek();
+            return line != null;
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

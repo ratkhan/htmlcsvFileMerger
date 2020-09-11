@@ -37,7 +37,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/opencsv-2.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/opencsv-4.3.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/commons-lang3-3.11.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

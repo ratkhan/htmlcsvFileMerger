@@ -1,6 +1,6 @@
 package com.company;
 
-import au.com.bytecode.opencsv.CSVWriter;
+import com.opencsv.CSVWriter;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.io.FileWriter;

@@ -2,10 +2,7 @@ package com.company;
 
 import com.google.common.io.Files;
 
-import java.util.List;
-
 public class ParserFactory {
-    private static Parser parser;
 
     public ParserFactory(){
     }
