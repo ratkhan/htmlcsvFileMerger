@@ -1,21 +1,17 @@
 package com.company;
 
 import com.opencsv.CSVWriter;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterCSV {
-    private String file;
-    private FileWriter outputFile;
     private CSVWriter writer;
 
-    public WriterCSV(String file){
+    public WriterCSV(String fileName){
         try {
-            this.file = file;
-            this.outputFile = new FileWriter(this.file);
-            this.writer = new CSVWriter(this.outputFile);
+            FileWriter outputFile = new FileWriter(fileName);
+            this.writer = new CSVWriter(outputFile);
         } catch ( IOException e){
             e.printStackTrace();
         }

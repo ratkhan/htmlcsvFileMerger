@@ -11,24 +11,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ParserCSV implements Parser  {
-    private String fileName;
     private Reader reader;
     private CSVReader CSVreader;
     private String[] header;
-    public ParserCSV(String fileName){
-        this.fileName = fileName;
 
+    public ParserCSV(String fileName) throws IOException{
+            Path path = Paths.get(fileName);
+            this.reader = Files.newBufferedReader(path);
+            this.CSVreader = new CSVReader(this.reader);
+            this.header = this.CSVreader.readNext();
     }
     
     @Override
-    public String[] readLine(){
-        try {
+    public String[] readLine() throws IOException{
             String[] line = this.CSVreader.readNext();
             return line;
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override
@@ -37,32 +34,14 @@ public class ParserCSV implements Parser  {
     }
 
     @Override
-    public boolean hasNextLine(){
-        try {
+    public boolean hasNextLine() throws IOException{
             String[] line = this.CSVreader.peek();
             return line != null;
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return false;
     }
 
     @Override
-    public String parse() {
-        try {
-            Path path = Paths.get(fileName);
-            this.reader = Files.newBufferedReader(path);
-            this.CSVreader = new CSVReader(this.reader);
-            this.header = this.CSVreader.readNext();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public void closeFile() throws Exception{
+    public void close() throws Exception{
         this.reader.close();
         this.CSVreader.close();
-
     }
 }
