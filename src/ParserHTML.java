@@ -1,5 +1,3 @@
-package com.company;
-
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

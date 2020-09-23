@@ -1,11 +1,10 @@
-package com.company;
-
 import com.opencsv.CSVReader;
 
 import java.io.IOException;
 import java.io.Reader;
 
 
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,7 +16,7 @@ public class ParserCSV implements Parser  {
 
     public ParserCSV(String fileName) throws IOException{
             Path path = Paths.get(fileName);
-            this.reader = Files.newBufferedReader(path);
+            this.reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
             this.CSVreader = new CSVReader(this.reader);
             this.header = this.CSVreader.readNext();
     }

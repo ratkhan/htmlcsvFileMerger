@@ -1,5 +1,3 @@
-package com.company;
-
 import com.google.common.io.Files;
 
 import java.io.File;
@@ -38,7 +36,11 @@ public class RecordMerger {
 
         for (String arg : args) {
             LOGGER.info("Checking " + arg);
-            transformToCSV(arg, fileArray);
+            if (new File(arg).isFile()) {
+                transformToCSV(arg, fileArray);
+            } else {
+                LOGGER.warning(arg + " is not a file");
+            }
 
         }
 
@@ -96,6 +98,7 @@ public class RecordMerger {
         Parser parser = parserFactory.getParser(fileName);
 
         String[] header = parser.readHeader();
+
         final int indexToSortBy = Utils.indexOfString(header, COLUMN_TO_MERGE_BY);
 
         ArrayList<ArrayList<String>> dataToSort;
@@ -163,7 +166,9 @@ public class RecordMerger {
 
         LOGGER.info("Reading sorted files and merging them line by line");
         for (Parser parser : parsers) {
-            currentLines.add(Arrays.asList(parser.readLine()));
+            if (parser.hasNextLine()) {
+                currentLines.add(Arrays.asList(parser.readLine()));
+            }
         }
 
         while (true) {
@@ -309,7 +314,7 @@ public class RecordMerger {
             if (fileToDelete.delete()) {
                 LOGGER.info("Deleted the file: " + fileToDelete.getName());
             } else {
-                LOGGER.info("Failed to delete the file." + fileToDelete.getName());
+                LOGGER.warning("Failed to delete the file." + fileToDelete.getName());
             }
         }
         //Deleting other created csv files
@@ -319,7 +324,7 @@ public class RecordMerger {
                 if (fileToDelete.delete()) {
                     LOGGER.info("Deleted the file: " + fileToDelete.getName());
                 } else {
-                    LOGGER.info("Failed to delete the file." + fileToDelete.getName());
+                    LOGGER.warning("Failed to delete the file." + fileToDelete.getName());
                 }
             }
         }

@@ -1,17 +1,22 @@
-package com.company;
-
 import com.opencsv.CSVWriter;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class WriterCSV {
     private CSVWriter writer;
 
     public WriterCSV(String fileName){
         try {
-            FileWriter outputFile = new FileWriter(fileName);
-            this.writer = new CSVWriter(outputFile);
+            Writer writer = Files.newBufferedWriter(Paths.get(fileName));
+
+            this.writer = new CSVWriter(writer,
+                    CSVWriter.DEFAULT_SEPARATOR,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.DEFAULT_LINE_END);
         } catch ( IOException e){
             e.printStackTrace();
         }

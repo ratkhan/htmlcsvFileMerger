@@ -1,5 +1,3 @@
-package com.company;
-
 import com.google.common.io.Files;
 
 import java.io.IOException;
