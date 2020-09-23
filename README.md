@@ -1,3 +1,6 @@
+This code merges anynumber of html, csv files based on one of the columns (by default set to "id").
+Main method is in class RecordMerger.
+
 1. Solution accepts any number of CSV, HTML files with any number of columns/rows
 2. By default solution merges files by field "id" case insensitive, to change key field set static variable
 	COLUMN_TO_MERGE_BY 
